@@ -1,0 +1,18 @@
+﻿@inject CSSProvider CSSProvider
+
+<style>
+    @Styles
+</style>
+
+
+@code {
+    string Styles => String.Join(Environment.NewLine, CSSProvider.Styles);
+
+    protected override void OnInitialized()
+    {
+        CSSProvider.AddedCallback = () =>
+        {
+            StateHasChanged();
+        };
+    }
+}

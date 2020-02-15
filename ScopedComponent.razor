@@ -1,0 +1,21 @@
+﻿@typeparam TScope
+@inject CSSProvider CSSProvider
+
+<span id="@ComponentId">
+    @Content
+</span>
+
+@code {
+    [Parameter]
+    public RenderFragment Content { get; set; }
+
+    [Parameter]
+    public RenderFragment Style { get; set; }
+
+    public string ComponentId => "comp" + typeof(TScope).FullName.GetHashCode().ToString();
+
+    protected override void OnInitialized()
+    {
+        CSSProvider.Add<TScope>(Style);
+    }
+}
